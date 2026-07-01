@@ -47,7 +47,7 @@ jobs:
     - name: Clone source code
       run: |
         df -hT
-        git clone --depth 1 $REPO_URL openwrt
+        git clone --depth 1 https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/openwrt-fork/sdf8057-ipq6000.git openwrt
         cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
 
     - name: Load custom config
