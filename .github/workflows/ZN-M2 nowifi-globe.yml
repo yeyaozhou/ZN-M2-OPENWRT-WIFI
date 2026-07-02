@@ -48,7 +48,14 @@ jobs:
       run: |
         df -hT
         git clone --depth 1 https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/openwrt-fork/sdf8057-ipq6000.git openwrt
-        cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
+
+    - name: Load custom feeds
+      run: |
+        [ -e $FEEDS_CONF ] && cp $FEEDS_CONF openwrt/feeds.conf.default
+        chmod +x $DIY_P1_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P1_SH
+        ./scripts/feeds update -a && ./scripts/feeds install -a
 
     - name: Load custom config
       run: |
