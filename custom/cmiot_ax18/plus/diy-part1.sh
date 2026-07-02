@@ -11,4 +11,5 @@
 #
 
 # Remove broken telephony feed (friscale/freeswitch and kamailio Makefile errors)
-sed -i '/^src-git \/https://github.com/openwrt/telephony\.git/',//&# \kermised\kermised/' feeds.conf.default
+# Remove telephony feed (broken freeswitch/kamailio)
+sed -i "/telephony/d" feeds.conf.default
